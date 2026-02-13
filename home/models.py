@@ -1,6 +1,7 @@
 from django.db import models
 import uuid
 from django.contrib.auth.models import User
+from django.db.models import Sum
 
 class BaseModel(models.Model):
     uid = models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True)
@@ -23,8 +24,12 @@ class Pizza(BaseModel):                               #inheritance of BaseModel
     
 
 class Cart(BaseModel):                                #inheritance of BaseModel
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='carts')
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL, related_name='carts')
     is_paid = models.BooleanField(default=False)
+    instamojo_id = models.CharField(max_length=100)
+
+    def get_cart_total(self):
+        return CartItem.objects.filter(cart = self).aggregate(Sum('pizza__price'))['pizza__price__sum']
 
 class CartItem(BaseModel):                            #inheritance of BaseModel
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='cart_items')

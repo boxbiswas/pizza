@@ -16,7 +16,25 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from home.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', home ),
+    path('login/', login_page, name='login'),
+    path('register/', register_page, name='register'),
+    path('add_cart/<pizza_uid>/', add_cart, name='add_cart' ),
+    path('cart/', cart, name='cart' ),
+    path('remove_cart_items/<cart_item_uid>/', remove_cart_items, name='remove_cart_items' ),
+    path('success/', success, name='success'),
+    path('orders/', orders, name='orders' ),
+    path('logout/', logout_page, name='logout' )
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += staticfiles_urlpatterns()

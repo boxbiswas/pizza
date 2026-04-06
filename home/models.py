@@ -35,4 +35,5 @@ class Cart(BaseModel):                                #inheritance of BaseModel
 class CartItem(BaseModel):                            #inheritance of BaseModel
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='cart_items')
     pizza = models.ForeignKey(Pizza, on_delete=models.CASCADE)
+    #item = models;
     

@@ -14,7 +14,7 @@ from django.conf import settings
 MOCK_PAYMENT = True
 
 if not MOCK_PAYMENT:
-    api=Instamojo(api_key=settings.API_KEY,
+    api=Instamojo(api_key=settwings.API_KEY,
                 auth_token=settings.AUTH_TOKEN,
                 endpoint='https://test.instamojo.com/api/1.1/'
                 )

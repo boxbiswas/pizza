@@ -1,25 +1,47 @@
 {% extends "base.html" %}
 {% block start %}
 
-<div class="mt-5">
-    <div class="row">
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+    <div>
+        <h1 class="mb-1 fw-bold text-dark">Delicious Pizzas</h1>
+        <p class="text-muted mb-0">Choose from our menu and add your favorite pizza to cart.</p>
+    </div>
+    <span class="badge text-bg-dark rounded-pill px-3 py-2"><i class="fa-solid fa-pizza-slice me-2 text-warning"></i>{{ pizzas|length }} items</span>
+</div>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-4 mb-4">
+    {% if pizzas %}
         {% for pizza in pizzas %}
-        <div class="col-md-3">
-            <div class="card shadow-lg" style="width: 18rem;">
-                <img src="/media/{{ pizza.images }}" style="height: 220px;" class="card-img-top" alt="{{ pizza.pizza_name }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ pizza.pizza_name }}</h5>
-                    <p>Price - {{ pizza.price }} | Category - {{ pizza.category.category_name }}</p>
-                    <a href="{% url 'add_cart' pizza.uid %}" class="btn btn-success" role="button"><i class="fa-solid fa-cart-shopping"></i> Cart</a>
-                    <a href="#" class="btn btn-primary" role="button">20% discount</a>
+            <div class="col">
+                <div class="card h-100 border-0 shadow-sm">
+                    <img src="/media/{{ pizza.images }}" class="card-img-top" alt="{{ pizza.pizza_name }}" style="height: 170px; object-fit: cover; background: #fff;">
+                    <div class="card-body d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                            <h5 class="card-title mb-0 fw-bold text-dark">{{ pizza.pizza_name }}</h5>
+                            <span class="badge text-bg-success rounded-pill">₹{{ pizza.price }}</span>
+                        </div>
+                        <p class="text-muted small mb-3">
+                            <span class="badge bg-light text-secondary border"><i class="fa-solid fa-tag me-1"></i>{{ pizza.category.category_name }}</span>
+                        </p>
+                        <div class="mt-auto d-grid">
+                            <a href="{% url 'add_cart' pizza.uid %}" class="btn btn-danger rounded-pill fw-bold py-2" role="button">
+                                <i class="fa-solid fa-plus me-1"></i> Add to Cart
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
         {% endfor %}
-    </div>
+    {% else %}
+        <div class="col-12">
+            <div class="alert alert-warning text-center py-5 rounded-4 shadow-sm">
+                <i class="fa-solid fa-face-frown-open fs-1 text-muted mb-3"></i>
+                <h4 class="mb-2">No pizzas available right now.</h4>
+                <p class="mb-0 text-muted">Please check back later!</p>
+            </div>
+        </div>
+    {% endif %}
 </div>
 
 {% endblock %}
 
-
-        

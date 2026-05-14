@@ -1,35 +1,33 @@
-{%extends "base.html" %}
-{%block start %}
-    
-<div class="container mt-5" >
-    <form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <h2>Login</h2>
-        <hr>   
+{% extends "base.html" %}
+{% block start %}
 
-        {% if messages %}
-            <div class="alert alert-primary" role="alert">
-            {% for message in messages %}
-                {{ message }}
+<div class="row justify-content-center my-3">
+    <div class="col-12 col-md-8 col-lg-5">
+        <form class="card border-0 shadow-sm" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="card-body p-4">
+                <div class="text-center mb-4">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-danger text-white rounded-circle shadow-sm mb-2" style="width: 48px; height: 48px;">
+                        <i class="fa-solid fa-user fs-5"></i>
+                    </div>
+                    <h2 class="mb-1 fw-bold text-dark">Welcome Back</h2>
+                    <p class="text-muted mb-0">Log in to continue your pizza orders.</p>
+                </div>
+
+                <div class="mb-3">
+                    <label for="loginUsername" class="form-label fw-medium text-secondary">Username</label>
+                    <input type="text" class="form-control form-control-lg" name="username" id="loginUsername" placeholder="Enter your username" required>
+                </div>
+                <div class="mb-4">
+                    <label for="loginPassword" class="form-label fw-medium text-secondary">Password</label>
+                    <input type="password" class="form-control form-control-lg" name="password" id="loginPassword" placeholder="Enter your password" required>
+                </div>
+
+                <button type="submit" class="btn btn-danger rounded-pill w-100 mb-3 py-2 fw-bold">Login</button>
+                <p class="mb-0 text-center text-muted">Don't have an account? <a href="/register/" class="text-danger fw-bold text-decoration-none">Register here</a></p>
             </div>
-            {% endfor %}
-        {% endif %}
-        
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Username</label>
-            <input type="text" class="form-control" name="username" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-        </div>
-        <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Password</label>
-            <input type="password" class="form-control" name="password" id="exampleInputPassword1">
-        </div>
-        <p>Don't have an account <a href ="/register/">Register</a></p>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-
-
+        </form>
+    </div>
 </div>
-
 
 {% endblock %}

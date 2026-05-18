@@ -129,9 +129,9 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-API_KEY = "test_1d1892f58039d35b1defc81b11e"
-AUTH_TOKEN = "test_b6912ddce92055eef455b9a673"
-SALT = "a669d88b6604426e94ceedf969"
+# API_KEY = ""
+# AUTH_TOKEN = ""
+# SALT = ""
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-44^o2&zyftyqdo^q1ldrgh4=wpkj1)zp6orru!h5nv(s9(wzns'
+# # SECURITY WARNING: keep the secret key used in production secret!
+# SECRET_KEY = ''
